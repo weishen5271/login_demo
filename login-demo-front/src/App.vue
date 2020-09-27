@@ -1,17 +1,25 @@
 <template>
-  <div id="app">
+  <div>
+    <NavMenu></NavMenu>
+    <Device></Device>
+    <chart></chart>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-
-export default {
-  name: 'App',
-
-}
+  import NavMenu from "./components/NavMenu.vue";
+  import Device from "@/components/device/index";
+  import chart from "@/components/device/chart";
+  export default {
+    components: {
+      NavMenu: NavMenu,
+      Device:Device,
+      chart:chart
+    },
+  }
 </script>
 
 <style>
-
 </style>
+

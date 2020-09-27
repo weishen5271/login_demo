@@ -5,13 +5,15 @@ Vue.use(VueRouter); //安装插件
 
 export const constantRouterMap = [
     //配置默认的路径，默认显示登录页
-    { path: '/', component: () => import('@/views/login')},
+    { path: '/login', component: () => import('@/views/login')},
 
     //配置登录成功页面，使用时需要使用 path 路径来实现跳转
     { path: '/success', component: () => import('@/views/success')},
 
     //配置登录失败页面，使用时需要使用 path 路径来实现跳转
-    { path: '/error', component: () => import('@/views/error'), hidden: true }
+    { path: '/error', component: () => import('@/views/error'), hidden: true },
+
+    { path: '/menu', component: () => import('@/views/menu')}
 ]
 
 export default new VueRouter({
