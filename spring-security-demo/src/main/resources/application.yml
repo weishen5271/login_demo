@@ -1,3 +1,5 @@
+
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -10,5 +12,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true # 开启驼峰配置
   mapper-locations: classpath*:mybatis/mapper/*Mapper.xml
-  type-aliases-package: com.example.demo.entity
+  type-aliases-package: com.example.demo.entity,com.example.demo.bo
   configuration-properties: classpath:mybatis/mybatis-config.xml
+server:
+  port: 8777

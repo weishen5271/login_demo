@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.DeviceInfoMapper">
+    <select id="queryList" resultType="DeviceInfoBo" parameterType="DeviceInfoBo">
+        select * from as_device_account
+    </select>
+
+    <insert id="insert" parameterType="DeviceInfo">
+        insert into as_device_account(eventId,departmentId,createBy,createDate,modifyBy,modifyDate,active,deviceCode,deviceName,deviceType,floor,status,record,sonDeviceType,brand,model,pd,useDate,manufacturer,contacts,telephone)
+        values (#{eventId},#{departmentId},#{createBy},#{createDate},#{modifyBy},#{modifyDate},#{active},#{deviceCode},#{deviceName},#{deviceType},#{floor},#{status},#{record},#{sonDeviceType},#{brand},#{model},#{pd},#{useDate},#{manufacturer},#{contacts},#{telephone})
+    </insert>
+</mapper>
