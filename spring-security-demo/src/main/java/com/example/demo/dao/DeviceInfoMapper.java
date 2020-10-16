@@ -20,4 +20,10 @@ public interface DeviceInfoMapper {
     List<DeviceInfoBo> queryList(DeviceInfoBo deviceInfoBo);
 
     void insert(DeviceInfo deviceInfo);
+
+    void delete(String eventId);
+
+    void update(DeviceInfo deviceInfo);
+
+    DeviceInfo queryByEventId(String eventId);
 }

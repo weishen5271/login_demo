@@ -9,7 +9,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +24,7 @@ import java.util.UUID;
  * <p>创建日期：2020/9/24 0024 14:54。</p>
  */
 @Service
+@Transactional
 public class DeviceinfoServiceImpl implements DeviceinfoService {
 
     @Autowired
@@ -47,6 +50,23 @@ public class DeviceinfoServiceImpl implements DeviceinfoService {
     public void insert(DeviceInfo deviceInfo) {
         deviceInfo.setEventId(UUID.randomUUID().toString());
         deviceInfoMapper.insert(deviceInfo);
+    }
+
+    @Override
+    public void update(DeviceInfo deviceInfo) {
+
+        deviceInfo.setModifyDate(new Date());
+        deviceInfoMapper.update(deviceInfo);
+    }
+
+    @Override
+    public void delete(String eventId) {
+        deviceInfoMapper.delete(eventId);
+    }
+
+    @Override
+    public DeviceInfo queryByEventId(String eventId) {
+        return deviceInfoMapper.queryByEventId(eventId);
     }
 
 

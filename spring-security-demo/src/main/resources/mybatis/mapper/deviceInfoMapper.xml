@@ -4,11 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.DeviceInfoMapper">
     <select id="queryList" resultType="DeviceInfoBo" parameterType="DeviceInfoBo">
-        select * from as_device_account
+        select * from as_device_account where active = 1
+    </select>
+
+    <select id="queryByEventId" resultType="DeviceInfo" parameterType="String">
+        select * from as_device_account where eventId = #{eventId}
     </select>
 
     <insert id="insert" parameterType="DeviceInfo">
-        insert into as_device_account(eventId,departmentId,createBy,createDate,modifyBy,modifyDate,active,deviceCode,deviceName,deviceType,floor,status,record,sonDeviceType,brand,model,pd,useDate,manufacturer,contacts,telephone)
-        values (#{eventId},#{departmentId},#{createBy},#{createDate},#{modifyBy},#{modifyDate},#{active},#{deviceCode},#{deviceName},#{deviceType},#{floor},#{status},#{record},#{sonDeviceType},#{brand},#{model},#{pd},#{useDate},#{manufacturer},#{contacts},#{telephone})
+        insert into as_device_account(eventId,departmentId,createBy,createDate,modifyBy,modifyDate,deviceCode,deviceName,deviceType,floor,status,record,sonDeviceType,brand,model,pd,useDate,manufacturer,contacts,telephone)
+        values (#{eventId},#{departmentId},#{createBy},#{createDate},#{modifyBy},#{modifyDate},#{deviceCode},#{deviceName},#{deviceType},#{floor},#{status},#{record},#{sonDeviceType},#{brand},#{model},#{pd},#{useDate},#{manufacturer},#{contacts},#{telephone})
     </insert>
+
+    <update id="delete" parameterType="String">
+        update as_device_account set active = 0 where eventId = #{eventId}
+    </update>
+
+    <update id="update" parameterType="DeviceInfo">
+        UPDATE `as_device_account` SET  `modifyBy` = #{modifyBy}, `modifyDate` = #{modifyDate},
+        `deviceCode` = #{deviceCode}, `deviceName` = #{deviceName}, `deviceType` = #{deviceType},
+         `floor` = #{floor}, `status` = #{status}, `record` = #{record}, `sonDeviceType` = #{sonDeviceType},
+         `brand` = #{brand}, `model` = #{model}, `pd` = #{pd},
+         `useDate` = #{useDate}, `manufacturer` = #{manufacturer}, `contacts` = #{contacts},
+          `telephone` = #{telephone} WHERE `eventId` = #{eventId};
+    </update>
 </mapper>

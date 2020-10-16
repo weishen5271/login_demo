@@ -11,11 +11,13 @@ package com.example.demo.entity;
 
 public class UserInfo {
 
-    private int id;
-
-    private String name;
-
-    private String password;
+    String username：用户名
+    String password： 密码
+    boolean enabled： 账号是否可用
+    boolean accountNonExpired：账号是否过期
+    boolean credentialsNonExpired：密码是否过期
+    boolean accountNonLocked：账号是否锁定
+    Collection<? extends GrantedAuthority> authorities)：用户权限列表
 
     public int getId() {
         return id;

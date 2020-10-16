@@ -21,4 +21,10 @@ public interface DeviceinfoService {
     ControllerResult queryPage(DeviceInfoBo deviceInfoBo);
 
     void insert(DeviceInfo deviceInfo);
+
+    void update(DeviceInfo deviceInfo);
+
+    void delete(String eventId);
+
+    DeviceInfo queryByEventId(String eventId);
 }

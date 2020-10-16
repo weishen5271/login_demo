@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -17,9 +19,11 @@ public class DeviceInfo {
     private String eventId;
     private String departmentId;
     private String createBy;
-    private String createDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createDate;
     private String modifyBy;
-    private String modifyDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date modifyDate;
     private String active;
     private String deviceCode;
     private String deviceName;
@@ -68,12 +72,20 @@ public class DeviceInfo {
         this.createBy = createBy;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Date getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
     }
 
     public String getModifyBy() {
@@ -84,13 +96,7 @@ public class DeviceInfo {
         this.modifyBy = modifyBy;
     }
 
-    public String getModifyDate() {
-        return modifyDate;
-    }
 
-    public void setModifyDate(String modifyDate) {
-        this.modifyDate = modifyDate;
-    }
 
     public String getActive() {
         return active;
