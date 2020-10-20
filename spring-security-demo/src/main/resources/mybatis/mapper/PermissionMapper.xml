@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.PermissionMapper" >
+  <resultMap id="SysPermissionMap" type="com.example.demo.entity.Permission" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="permission_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="permission_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, permission_code, permission_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="SysPermissionMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.Permission" >
+    insert into sys_permission (id, permission_code, permission_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{permissionCode,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.Permission" >
+    insert into sys_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="permissionCode != null" >
+        permission_code,
+      </if>
+      <if test="permissionName != null" >
+        permission_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="permissionCode != null" >
+        #{permissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionName != null" >
+        #{permissionName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.Permission" >
+    update sys_permission
+    <set >
+      <if test="permissionCode != null" >
+        permission_code = #{permissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionName != null" >
+        permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Permission" >
+    update sys_permission
+    set permission_code = #{permissionCode,jdbcType=VARCHAR},
+      permission_name = #{permissionName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectListByUser" resultMap="SysPermissionMap">
+        SELECT
+        p.*
+        FROM
+        sys_user AS u
+        LEFT JOIN sys_user_role_relation AS ur
+        ON u.id = ur.user_id
+        LEFT JOIN sys_role AS r
+        ON r.id = ur.role_id
+        LEFT JOIN sys_role_permission_relation AS rp
+        ON r.id = rp.role_id
+        LEFT JOIN sys_permission AS p
+        ON p.id = rp.permission_id
+        WHERE u.id = #{userId}
+    </select>
+
+  <!--根据路径地址返回权限集合-->
+  <select id="selectListByPath" resultType="SysPermissionMap">
+        SELECT
+            pe.*
+        FROM
+            sys_permission pe
+        LEFT JOIN sys_request_path_permission_relation re ON re.permission_id = pe.id
+        LEFT JOIN sys_request_path pa ON pa.id = re.url_id
+        WHERE pa.url = #{path}
+  </select>
+
+</mapper>

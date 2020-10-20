@@ -1,38 +1,76 @@
 package com.example.demo.entity;
 
-/**
- * <p>类描述：。</p>
- *
- * @author 沈伟 [shenwei]。
- * @version v1.0.0.1。
- * @since JDK1.8。
- * <p>创建日期：2020/9/18 0018 10:05。</p>
- */
+import java.util.Date;
 
 public class UserInfo {
+    private Integer id;
 
-    String username：用户名
-    String password： 密码
-    boolean enabled： 账号是否可用
-    boolean accountNonExpired：账号是否过期
-    boolean credentialsNonExpired：密码是否过期
-    boolean accountNonLocked：账号是否锁定
-    Collection<? extends GrantedAuthority> authorities)：用户权限列表
+    private String account;
 
-    public int getId() {
+    private String userName;
+
+    private String password;
+
+    private Date lastLoginTime;
+
+    private Boolean enabled;
+
+    private Boolean accountNonExpired;
+
+    private Boolean accountNonLocked;
+
+    private Boolean credentialsNonExpired;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private Integer createUser;
+
+    private Integer updateUser;
+
+    public UserInfo(Integer id, String account, String userName, String password, Date lastLoginTime, Boolean enabled, Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Date createTime, Date updateTime, Integer createUser, Integer updateUser) {
+        this.id = id;
+        this.account = account;
+        this.userName = userName;
+        this.password = password;
+        this.lastLoginTime = lastLoginTime;
+        this.enabled = enabled;
+        this.accountNonExpired = accountNonExpired;
+        this.accountNonLocked = accountNonLocked;
+        this.credentialsNonExpired = credentialsNonExpired;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.createUser = createUser;
+        this.updateUser = updateUser;
+    }
+
+    public UserInfo() {
+        super();
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAccount() {
+        return account;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccount(String account) {
+        this.account = account == null ? null : account.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -40,6 +78,78 @@ public class UserInfo {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Boolean getAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public Boolean getAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public Boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(Integer createUser) {
+        this.createUser = createUser;
+    }
+
+    public Integer getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(Integer updateUser) {
+        this.updateUser = updateUser;
     }
 }

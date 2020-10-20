@@ -15,7 +15,7 @@ import java.util.List;
  * <p>创建日期：2020/9/24 0024 14:50。</p>
  */
 @Mapper
-public interface DeviceInfoMapper {
+public interface DeviceInfoMapper  {
 
     List<DeviceInfoBo> queryList(DeviceInfoBo deviceInfoBo);
 
@@ -26,4 +26,5 @@ public interface DeviceInfoMapper {
     void update(DeviceInfo deviceInfo);
 
     DeviceInfo queryByEventId(String eventId);
+
 }

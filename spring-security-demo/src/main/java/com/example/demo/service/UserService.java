@@ -15,5 +15,7 @@ import java.util.List;
 
 public interface UserService {
 
-    List<UserInfo> queryList(UserInfo userInfo);
+    UserInfo queryByName(String userName);
+
+    void update(UserInfo userInfo);
 }

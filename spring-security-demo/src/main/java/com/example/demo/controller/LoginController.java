@@ -16,13 +16,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
 
-    @RequestMapping("/login")
-    public Object login(){
-        return "login";
-    }
-
-    @RequestMapping("/test1")
-    public Object test(){
-        return "test1";
-    }
 }

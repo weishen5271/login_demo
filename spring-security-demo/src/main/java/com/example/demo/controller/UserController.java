@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>创建日期：2020/9/18 0018 10:24。</p>
  */
 
-@RequestMapping("user")
 @RestController
 public class UserController {
 
@@ -24,7 +23,12 @@ public class UserController {
 
     @RequestMapping("queryList")
     public Object queryList(UserInfo userInfo){
-        return userService.queryList(userInfo);
+        return null;
     }
 
+    // 测试权限接口
+    @RequestMapping("/getUser")
+    public Object getUser(){
+        return "用户信息";
+    }
 }

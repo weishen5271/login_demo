@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.config.VerifyCode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,10 +35,6 @@ public class TestController {
       */
     @GetMapping("getCode")
     public void getCode(HttpSession session, HttpServletResponse response) throws IOException {
-        VerifyCode verifyCode = new VerifyCode();
-        BufferedImage image = verifyCode.getImage();
-        String text = verifyCode.getText();
-        session.setAttribute("verifyCode",text);
-        VerifyCode.output(image,response.getOutputStream());
+
     }
 }

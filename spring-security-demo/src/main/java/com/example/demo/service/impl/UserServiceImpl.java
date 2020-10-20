@@ -4,15 +4,9 @@ import com.example.demo.dao.UserInfoMapper;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>类描述：。</p>
@@ -23,30 +17,18 @@ import java.util.List;
  * <p>创建日期：2020/9/18 0018 10:23。</p>
  */
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
 
-    /**
-     * 需新建配置类注册一个指定的加密方式Bean，或在下一步Security配置类中注册指定
-     */
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
-    public List<UserInfo> queryList(UserInfo userInfo) {
-        return userInfoMapper.queryList(userInfo);
+    public UserInfo queryByName(String userName) {
+        return userInfoMapper.queryByName(userName);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-
-        UserInfo userInfo = userInfoMapper.loadUserByUsername(s);
-        if (userInfo == null) {
-            throw new UsernameNotFoundException("该用户不存在！");
-        }
-        //把获得的账号密码传给security的User
-        return new User(userInfo.getName(), passwordEncoder.encode(userInfo.getPassword()),new ArrayList<>());
+    public void update(UserInfo userInfo) {
+        userInfoMapper.updateByPrimaryKey(userInfo);
     }
 }

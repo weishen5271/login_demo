@@ -28,4 +28,8 @@
          `useDate` = #{useDate}, `manufacturer` = #{manufacturer}, `contacts` = #{contacts},
           `telephone` = #{telephone} WHERE `eventId` = #{eventId};
     </update>
+
+    <select id="queryPage" resultType="DeviceInfo">
+        select * from as_device_account ${ew.customSqlSegment}
+    </select>
 </mapper>

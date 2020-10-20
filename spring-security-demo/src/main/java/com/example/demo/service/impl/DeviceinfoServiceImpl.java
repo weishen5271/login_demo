@@ -37,6 +37,7 @@ public class DeviceinfoServiceImpl implements DeviceinfoService {
 
     @Override
     public ControllerResult queryPage(DeviceInfoBo deviceInfoBo) {
+
         PageHelper.startPage(deviceInfoBo.getStartIndex(), deviceInfoBo.getPageSize());
         List<DeviceInfoBo> deviceInfoList = deviceInfoMapper.queryList(deviceInfoBo);
         PageInfo<DeviceInfoBo> pageInfo = new PageInfo<DeviceInfoBo>(deviceInfoList);

@@ -4,37 +4,78 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
-    <classPathEntry  location="C:\MavenBox\myproj\mysql\mysql-connector-java\8.0.17\mysql-connector-java-8.0.17.jar"/>
-    <context id="DB2Tables"  targetRuntime="MyBatis3">
-        <!-- 生成的Java文件的编码 -->
-        <property name="javaFileEncoding" value="UTF-8" />　　　　 <property name="javaFileEncoding" value="UTF-8" />　　　　 <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true 时把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal --> 　　　　 <javaTypeResolver> 　　　　　　<property name="forceBigDecimals" value="false" />　　　　 </javaTypeResolver>         <!-- JavaBean 实现 序列化 接口 -->
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+    <classPathEntry  location="D:\maven\javatools\local\repo\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+    <!-- context 是逆向工程的主要配置信息 -->
+    <!-- id：起个名字 -->
+    <!-- targetRuntime：设置生成的文件适用于那个 mybatis 版本 -->
+    <context id="default" targetRuntime="MyBatis3">
+        <!--optional,指在创建class时，对注释进行控制-->
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
-            <property name="suppressAllComments" value="false"/>
+            <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        <!--数据库链接URL，用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/workflow?useUnicode=true" userId="myproj" password="myproj">
-        </jdbcConnection>
+        <!--jdbc的数据库连接 wg_insert 为数据库名字-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/mytest?useUnicode=true&amp;characeterEncoding=utf-8&amp;serverTimezone=UTC" userId="root"
+                        password="db@mysql"></jdbcConnection>
+        <!--非必须，类型处理器，在数据库类型和java类型之间的转换控制-->
         <javaTypeResolver>
+            <!-- 默认情况下数据库中的 decimal，bigInt 在 Java 对应是 sql 下的 BigDecimal 类 -->
+            <!-- 不是 double 和 long 类型 -->
+            <!-- 使用常用的基本类型代替 sql 包下的引用类型 -->
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
-        <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.myproj.workflow.entity" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true"/>
+        <!-- targetPackage：生成的实体类所在的包 -->
+        <!-- targetProject：生成的实体类所在的硬盘位置 -->
+        <javaModelGenerator targetPackage="com.example.demo.entity"
+                            targetProject="src/main/java">
+            <!-- 是否允许子包 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否对modal添加构造函数 -->
+            <property name="constructorBased" value="true"/>
+            <!-- 是否清理从数据库中查询出的字符串左右两边的空白字符 -->
             <property name="trimStrings" value="true"/>
+            <!-- 建立modal对象是否不可改变 即生成的modal对象不会有setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
         </javaModelGenerator>
-        <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="mapper.workflow" targetProject="src/main/resources">
-            <property name="enableSubPackages" value="true"/>
+        <!-- targetPackage 和 targetProject：生成的 mapper 文件的包和位置 -->
+        <sqlMapGenerator targetPackage="mybatis.mapper"
+                         targetProject="src/main/resources">
+            <!-- 针对数据库的一个配置，是否把 schema 作为字包名 -->
+            <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
-        <!-- 生成mapper.java的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.myproj.workflow.mapper" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true"/>
+        <!-- targetPackage 和 targetProject：生成的 interface 文件的包和位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.example.demo.dao" targetProject="src/main/java">
+            <!-- 针对 oracle 数据库的一个配置，是否把 schema 作为字包名 -->
+            <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
-        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="proc_model" domainObjectName="ProcModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-
+        <!-- tableName是数据库中的表名，domainObjectName是生成的JAVA模型名，后面的参数不用改，要生成更多的表就在下面继续加table标签 -->
+        <!--用户表-->
+        <!--<table tableName="sys_user" domainObjectName="UserInfo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>-->
+        <!--用户角色关系表-->
+        <table tableName="sys_user_role_relation " domainObjectName="UserRoleRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <!--角色表-->
+        <table tableName="sys_role" domainObjectName="RoleInfo"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <!--角色权限关联关系表-->
+        <table tableName="sys_role_permission_relation" domainObjectName="RolePermissionRelation"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
+        <!--权限表-->
+        <table tableName="sys_permission" domainObjectName="Permission"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>
     </context>
 </generatorConfiguration>
