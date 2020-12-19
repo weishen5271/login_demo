@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * <p>类描述：。</p>
+ * <p>前后端分离跨域配置</p>
  *
  * @author 沈伟 [shenwei]。
  * @version v1.0.0.1。

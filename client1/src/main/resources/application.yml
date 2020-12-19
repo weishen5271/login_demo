@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: client
+server:
+  port: 1112
+security:
+  oauth2:
+    client:
+      client-id: yyy_client
+      client-secret: 123
+      access-token-uri: http://127.0.0.1:1111/oauth/token
+      user-authorization-uri: http://127.0.0.1:1111/oauth/authorize
+      scope: all
+    resource:
+      user-info-uri: http://127.0.0.1:1111/user/me
+      prefer-token-info: true
+    authorization:
+      check-token-access: http://127.0.0.1:1111/oauth/check_token
+  basic:
+    enabled: false
+logging:
+  level:
+    root: debug
