@@ -47,16 +47,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
         if (userInfo == null) {
             throw new RuntimeException("用户不存在");
         }
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        if (userInfo != null) {
-            //获取该用户所拥有的权限
-            List<Permission> sysPermissions = permissionService.selectListByUser(userInfo.getId());
-            // 声明用户授权
-            sysPermissions.forEach(sysPermission -> {
-                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(sysPermission.getPermissionCode());
-                grantedAuthorities.add(grantedAuthority);
-            });
-        }
-        return new User(userInfo.getAccount(), userInfo.getPassword(), userInfo.getEnabled(), userInfo.getAccountNonExpired(), userInfo.getCredentialsNonExpired(), userInfo.getAccountNonLocked(), grantedAuthorities);
+
+        return new User(userInfo.getAccount(), userInfo.getPassword(),null);
     }
 }

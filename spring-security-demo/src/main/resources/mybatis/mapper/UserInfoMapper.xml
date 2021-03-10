@@ -7,21 +7,10 @@
       <arg column="account" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="last_login_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="enabled" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="account_non_expired" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="account_non_locked" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="credentials_non_expired" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="create_user" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="update_user" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, account, user_name, password, last_login_time, enabled, account_non_expired, 
-    account_non_locked, credentials_non_expired, create_time, update_time, create_user, 
-    update_user
+    id, account, user_name, password
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
