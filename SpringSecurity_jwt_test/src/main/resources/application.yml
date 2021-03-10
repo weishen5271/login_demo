@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: spring-login
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver        #  驱动包
+    url: jdbc:mysql://localhost:3306/mytest?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+    username: root                 #用户名
+    password: root
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true # 开启驼峰配置
+  mapper-locations: classpath*:mybatis/mapper/*Mapper.xml
+  type-aliases-package: com.example.demo.entity,com.example.demo.bo
+  configuration-properties: classpath:mybatis/mybatis-config.xml
+server:
+  port: 8777
+logging:
+  level:
+    com.example.demo.dao: debug
